@@ -18,8 +18,8 @@ export default function SearchBar({ onSearch }) {
       <div className={styles.inputGroup}>
          <input  value={id}  onChange={handleChange}required="" type="search" name="text" autocomplete="off" className={styles.input} />
          <button onClick={handleSearch}>
-            <span className={styles.transition}></span>
-            <span className={styles.gradient}></span>
+            {/* <span className={styles.transition}></span>
+            <span className={styles.gradient}></span> */}
             <span className={styles.label}>Agregar</span>
          </button>
       </div>

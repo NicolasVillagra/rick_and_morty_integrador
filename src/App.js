@@ -1,35 +1,62 @@
 import './App.css';
-import Card from './components/Card.jsx';
 import Cards from './components/Cards.jsx';
-import SearchBar from './components/SearchBar.jsx';
 import './components/Css_Modules/App.module.css'
 import Title from './components/Title';
 import Nav from './components/Nav';
 import { useState } from 'react';
 import axios from 'axios';
+import { Routes,Route } from 'react-router-dom';
+import About from './components/About';
+import Detail from './components/Detail'
+import Form from './components/Form';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import Favorites from './components/Favorites/Favorites';
 
 
 
 function App() {
+   const navigate = useNavigate()
+   const [access, setAccess] = useState(false)
+   const email ="nicovillagra123@gmail.com"
+   const password = "Santiago12"
+
+   const login = (userData) =>{
+      if(userData.email === email && userData.password === password ){
+         setAccess(true)
+         navigate('/home')
+      }
+
+   }
+   useEffect(() => {
+      !access && navigate('/');
+   }, [access]);
 
    const onClose = (id) => {
       const filteredCharacters = characters.filter((character) => character.id !== parseInt(id));
       setCharacters(filteredCharacters);
     };
 
-   const [characters, setCharacters] = useState([])
+   const [characters, setCharacters] = useState([]);
    
-console.log(characters);
 
    function onSearch(id) {
-      axios(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
-         if (data.name) {
-            setCharacters((oldChars) => [...oldChars, data]);
-         }
-         else {
-            window.alert('¡No hay personajes con este ID!');
-         }
-      });
+
+      if(id > 876){
+         window.alert('no hay id con ese personaje')
+      }
+      else{
+         axios(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
+            if (data.name) {
+               setCharacters((oldChars) => [...oldChars, data]);
+            }
+            else {
+               window.alert('¡No hay personajes con este ID!');
+            }
+         });
+      }
+
+
    }
    
    
@@ -47,9 +74,17 @@ console.log(characters);
    
    return (
       <div className='App'>
-         <Nav onSearch={onSearch} onRandom={onRandom} />
+
+         <Nav onSearch={onSearch} onRandom={onRandom}/>
          <Title/>
-         <Cards characters={characters} onClose={onClose} />
+         <Routes>
+            <Route path='/Favorites' element={<Favorites/>}/>
+            <Route path='/' element={<Form login= {login}/>}/>
+            <Route path='/home' element={<Cards characters={characters} onClose={onClose} />}/>
+            <Route path='/about' element={<About/>}/>
+            <Route path='/detail/:id' element={<Detail/>} />
+         </Routes>
+
       </div>
    );
 }

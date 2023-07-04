@@ -2,25 +2,24 @@ import React from 'react'
 import SearchBar from './SearchBar'
 import { styled } from 'styled-components'
 import SearchRandom from './SearchRandom'
-
-const NavStyle = styled.nav`
-width:100%;
-background:rgba(0, 0, 0, 0.199);
-height:100px;
-display:flex;
-align-items: center;
-justify-content: flex-end;
-`
+import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import styles from './Css_Modules/Nav.module.css'
 
 const Nav = (props) => {
+    let location = useLocation()
+
 
     const {onSearch,onRandom} =props
     return (
-        <NavStyle>
+    <nav className={`${styles.nav} ${(location.pathname === "/")? styles.disabled : null}`}>
+            <Link to="/Favorites">Favoritos</Link>
+            <Link to="/Home">Home</Link>
+            <Link to="/about">About</Link>
             <SearchRandom onRandom={onRandom} />
             <SearchBar onSearch={onSearch} />
-        </NavStyle>
+        </nav>
     )
-}
+    }
 
 export default Nav
