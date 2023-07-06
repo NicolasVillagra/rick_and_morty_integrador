@@ -1,5 +1,5 @@
 import './App.css';
-import Cards from './components/Cards.jsx';
+import Cards from './components/Cards';
 import './components/Css_Modules/App.module.css'
 import Title from './components/Title';
 import Nav from './components/Nav';

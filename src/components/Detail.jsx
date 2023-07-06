@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { styled } from 'styled-components'
+import styles from './Css_Modules/Detail.module.css'
 
 const P = styled.p`
 font-size:20px;
@@ -40,18 +41,36 @@ const Detail = () => {
  console.log(character)
   return (
     <Container>
-      <h1 style={{color:'white'}}>DETALLES DEL PERSONAJE</h1>
-      <Div>
-      {character.name && <P>Name: {character.name}</P>}
+    <div className={styles.myCard}>
+    <div className={styles.innerCard}>
+      <div className={styles.frontSide}>
+        {character.image && <img src={character.image} alt="Character" />}
+      </div>
+      <div className={styles.backSide}>
+         {character.name && <P>Name: {character.name}</P>}
       {character.status && <p>Status: {character.status}</p>}
-      {character.species && <p>Species: {character.species}</p>}
-      {character.gender && <p>Gender: {character.gender}</p>}
+     {character.species && <p>Species: {character.species}</p>}
+     {character.gender && <p>Gender: {character.gender}</p>}
       {character.origin && character.origin.name && (
-        <p>Origin: {character.origin.name}</p>
-      )}
-      {character.image && <img src={character.image} alt="Character" />}
-      </Div>
-    </Container>
+       <p>Origin: {character.origin.name}</p>
+     )}
+      </div>
+    </div>
+  </div>
+  </Container>
+    // <Container>
+    //   <h1 style={{color:'white'}}>DETALLES DEL PERSONAJE</h1>
+    //   <Div>
+    //   {character.name && <P>Name: {character.name}</P>}
+    //   {character.status && <p>Status: {character.status}</p>}
+    //   {character.species && <p>Species: {character.species}</p>}
+    //   {character.gender && <p>Gender: {character.gender}</p>}
+    //   {character.origin && character.origin.name && (
+    //     <p>Origin: {character.origin.name}</p>
+    //   )}
+    //   {character.image && <img src={character.image} alt="Character" />}
+    //   </Div>
+    // </Container>
   )
 }
 

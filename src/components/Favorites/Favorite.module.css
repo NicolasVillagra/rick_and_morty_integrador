@@ -1,0 +1,14 @@
+.container{
+    display: flex;
+    gap: 10px;
+}
+.selector{
+    width: 200px;
+    height: 40px;
+    padding: 10px;
+    transition: .2s linear;
+    border: 2.5px solid black;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
